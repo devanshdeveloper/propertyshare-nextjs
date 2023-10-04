@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  /* font-family: "Montserrat"; */
+  overflow-x: hidden;
+  background-color: #1d1e29;
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* Chrome, Edge, and Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 15px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 14px;
+  /* border: 3px solid var(--primary); */
+}
+
+.brand-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #1d1e29 #1d1e29;
+}
+
+/* Chrome, Edge, and Safari */
+.brand-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 7px;
+}
+
+.brand-scrollbar::-webkit-scrollbar-track {
+  background: #17181e;
+  border-radius: 5px;
+}
+
+.brand-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #656a83;
+  border-radius: 14px;
+}
+
+@layer components {
+  .btn {
+    @apply rounded-lg transition-all duration-200  active:bg-opacity-40 disabled:cursor-not-allowed disabled:opacity-50 px-4 py-2 flex items-center;
+  }
+
+  .btn-default {
+    @apply bg-brand-500 hover:bg-brand-300 disabled:hover:bg-brand-500  active:bg-brand-500 text-brand-100;
+  }
+
+  .btn-secondary {
+    @apply bg-white bg-opacity-10 text-white hover:bg-opacity-20 active:bg-opacity-5 active:text-opacity-60 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-opacity-10;
+  }
+  .input-error { 
+    @apply text-red-500;
+  }
+  .content-heading {
+    @apply text-brand-100 text-lg font-semibold;
+  }
+
+  .content-description {
+    @apply text-brand-300 mt-4;
+  }
+
+  .switch {
+    @apply relative inline-block;
+    min-height: 28px;
+    min-width: 56px;
+  }
+
+  .switch input {
+    @apply opacity-0 w-0 h-0;
+  }
+
+  .slider {
+    @apply absolute inset-0 cursor-pointer bg-brand-900 transition-all duration-300 rounded-3xl;
+  }
+
+  .slider:before {
+    @apply absolute h-5 w-5 left-1 bottom-1 bg-white transition-all duration-300 rounded-full;
+    content: "";
+  }
+
+  input:checked + .slider {
+    background-color: #2196f3;
+  }
+
+  input:checked + .slider:before {
+    @apply translate-x-7;
+  }
+
+  .radio-container {
+    @apply relative cursor-pointer select-none text-white;
+  }
+
+  .radio-container input {
+    @apply absolute opacity-0 cursor-pointer;
+  }
+
+  .radio-box {
+    @apply py-4 px-6 bg-brand-900 rounded text-xs leading-4 tracking-wider whitespace-nowrap transition-all duration-300;
+  }
+
+  .radio-container input:checked ~ .radio-box {
+    @apply bg-grey-400;
+  }
+
+  .radio-container:hover input ~ .radio-box {
+    @apply bg-brand-500;
+  }
+
+  .color-container {
+    @apply relative cursor-pointer select-none text-white;
+  }
+
+  .color-container input {
+    @apply absolute opacity-0 cursor-pointer;
+  }
+
+  .color-box {
+    @apply w-5 h-5 rounded-full cursor-pointer ring-[2px] ring-brand-800 border-[1px] border-solid border-brand-800 opacity-50 transition-all duration-200;
+  }
+
+  .color-container input:checked ~ .color-box,
+  .color-container:hover input ~ .color-box {
+    @apply opacity-100 ring-brand-200;
+  }
+}
