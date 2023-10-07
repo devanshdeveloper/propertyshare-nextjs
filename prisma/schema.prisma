@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = "file:./dev.db"
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 model User {
@@ -31,6 +32,9 @@ model PropertiesFavByUser {
     propertyId String
     property   Property @relation(fields: [propertyId], references: [id])
     assignedAt DateTime @default(now())
+
+    @@index([userId])
+    @@index([propertyId])
 }
 
 model Property {
@@ -52,6 +56,8 @@ model Property {
     postedById   String
 
     PropertiesFavByUser PropertiesFavByUser[]
+
+    @@index([postedById])
 }
 
 model Account {
@@ -71,6 +77,7 @@ model Account {
     user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
     @@map("accounts")
 }
 
@@ -84,6 +91,7 @@ model Session {
     createdAt    DateTime @default(now())
     updatedAt    DateTime @updatedAt
 
+    @@index([userId])
     @@map("sessions")
 }
 

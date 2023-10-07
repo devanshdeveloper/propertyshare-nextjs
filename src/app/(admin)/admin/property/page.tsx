@@ -1,15 +1,24 @@
 import PropertyBox from "@/components/PropertyBox";
 import TabNav from "@/components/home/TabNav";
 import { prisma } from "@/prisma";
-import { getCities } from "@/utils";
+import { camelize, getCities } from "@/utils";
+
+type WhereProps = {
+  city?: string;
+  type?: string;
+};
 
 export default async function page({ searchParams }) {
-  const where = { approved: true };
+  const where: WhereProps = {};
+  const orderBy = [];
   const city = searchParams.city;
+  const type = searchParams.type;
+  const sortBy = searchParams.sortBy;
   if (city && city !== "All Cities") where.city = city;
+  if (type && type !== "All") where.type = type;
+  if (sortBy && sortBy !== "None") orderBy[0] = { [camelize(sortBy)]: "desc" };
 
-  const properties = await prisma.property.findMany({ where });
-
+  const properties = await prisma.property.findMany({ where, orderBy });
   const cities = getCities(
     await prisma.property.findMany({ select: { city: true } })
   );
