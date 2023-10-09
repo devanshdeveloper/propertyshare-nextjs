@@ -11,6 +11,7 @@ function FavoritesButton({ propertyId }) {
   return (
     <button
       onClick={() =>
+        // @ts-ignore
         startTransition(() => addToFavorites(data.user.id, propertyId))
       }
       className="text-white inline-flex justify-center absolute top-5 right-5 "

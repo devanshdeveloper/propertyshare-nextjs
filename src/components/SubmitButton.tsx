@@ -1,5 +1,3 @@
-import React from "react";
-
 function SubmitButton({ submit }) {
   return (
     <button onClick={() => submit()} className="btn btn-default">
