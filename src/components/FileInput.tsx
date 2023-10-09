@@ -18,6 +18,7 @@ export function FilesInput({ className, defaultImages, ...props }) {
           <Image src={defaultImages} alt={"none"} width={400} height={400} />
         )}
         {files &&
+        // @ts-ignore
           [...files].map((file) => (
             <Image
               key={file.name}
